@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mailserver:
     image: ghcr.io/docker-mailserver/docker-mailserver:latest
@@ -18,6 +16,8 @@ services:
       - ./docker-data/dms/mail-logs/:/var/log/mail/
       - ./docker-data/dms/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
+      - /etc/letsencrypt/live/mail.rigora.com.br/fullchain.pem:/tmp/docker-mailserver/ssl/fullchain.pem:ro
+      - /etc/letsencrypt/live/mail.rigora.com.br/privkey.pem:/tmp/docker-mailserver/ssl/privkey.pem:ro
       - ./certs:/tmp/docker-mailserver/ssl:ro
 
     restart: always
