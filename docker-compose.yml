@@ -45,9 +45,11 @@ services:
       - ROUNDCUBEMAIL_DB_PASSWORD=roundcube_password
       - ROUNDCUBEMAIL_DB_NAME=roundcube
       - ROUNDCUBEMAIL_DEFAULT_HOST=mailserver
-      - ROUNDCUBEMAIL_DEFAULT_PORT=143
+      - ROUNDCUBEMAIL_DEFAULT_PORT=993
       - ROUNDCUBEMAIL_SMTP_SERVER=mailserver
       - ROUNDCUBEMAIL_SMTP_PORT=587
+      - ROUNDCUBEMAIL_IMAP_SSL=true
+      - ROUNDCUBEMAIL_SMTP_SSL=true
     volumes:
       - roundcube_data:/var/www/html
     labels:
