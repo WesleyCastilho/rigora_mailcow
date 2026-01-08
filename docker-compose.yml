@@ -450,9 +450,6 @@ services:
         - ./data/web/inc/functions.auth.inc.php:/mailcowauth/functions.auth.inc.php:z
         - ./data/web/inc/sessions.inc.php:/mailcowauth/sessions.inc.php:z
         - sogo-web-vol-1:/usr/lib/GNUstep/SOGo/
-      ports:
-        # - "${HTTPS_BIND:-}:${HTTPS_PORT:-443}:${HTTPS_PORT:-443}"
-        # - "${HTTP_BIND:-}:${HTTP_PORT:-80}:${HTTP_PORT:-80}"
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=rigora_net"
@@ -467,6 +464,7 @@ services:
         mailcow-network:
           aliases:
             - nginx
+        rigora_net:
 
     acme-mailcow:
       depends_on:
@@ -667,8 +665,6 @@ services:
 
 networks:
   mailcow-network:
-    aliases:
-      - nginx
     driver: bridge
     driver_opts:
       com.docker.network.bridge.name: br-mailcow
@@ -678,10 +674,8 @@ networks:
       config:
         - subnet: ${IPV4_NETWORK:-172.22.1}.0/24
         - subnet: ${IPV6_NETWORK:-fd4d:6169:6c63:6f77::/64}
-    rigora_net:
-
-    
-  
+  rigora_net:
+    external: true
 
 volumes:
   vmail-vol-1:
